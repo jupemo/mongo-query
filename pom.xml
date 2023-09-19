@@ -26,6 +26,8 @@
 
 	<modules>
 		<module>application</module>
+		<module>infrastructure/persistence</module>
+		<module>infrastructure/rest</module>
 	</modules>
 
 	<dependencies>
