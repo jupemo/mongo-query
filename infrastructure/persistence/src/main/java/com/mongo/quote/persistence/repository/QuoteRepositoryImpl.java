@@ -5,6 +5,8 @@ import com.mongo.quote.persistence.repository.jpa.SpringDataQuoteRepository;
 import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,12 +21,12 @@ public class QuoteRepositoryImpl implements QuoteRepository {
   }
 
   @Override
-  public List<QuoteDocument> findByAuthor(String author) {
-    return repository.findByQuoteAuthor(author);
+  public Page<QuoteDocument> findByAuthor(String author, Pageable pageable) {
+    return repository.findByQuoteAuthor(author, pageable);
   }
 
   @Override
-  public List<QuoteDocument> findAll() {
-    return repository.findAll();
+  public Page<QuoteDocument> findAll(Pageable pageable) {
+    return repository.findAll(pageable);
   }
 }
