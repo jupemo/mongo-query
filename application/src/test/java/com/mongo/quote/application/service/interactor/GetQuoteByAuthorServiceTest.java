@@ -20,6 +20,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 @ExtendWith(MockitoExtension.class)
 class GetQuoteByAuthorServiceTest {
@@ -36,7 +37,7 @@ class GetQuoteByAuthorServiceTest {
     new PageImpl<>(quotesDocument);
 
     when(quoteRepository.findByAuthor(author, PageRequest.of(1, 10)))
-        .thenReturn(new PageImpl<>(quotesDocument));
+        .thenReturn(new PageImpl<>(quotesDocument, Pageable.ofSize(10), 1));
 
     var result = getQuoteByAuthorService.getByAuthor(new Command(author, 1, 10));
 
