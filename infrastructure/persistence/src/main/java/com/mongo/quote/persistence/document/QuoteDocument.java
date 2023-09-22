@@ -1,28 +1,31 @@
 package com.mongo.quote.persistence.document;
 
-import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
-import org.springframework.data.mongodb.core.index.CompoundIndex;
-import org.springframework.data.mongodb.core.index.CompoundIndexes;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
+@ToString
+@EqualsAndHashCode
 @Document(collection = "quotes")
-@CompoundIndexes({
-    @CompoundIndex(
-        name = "quote__id_author",
-        def = "{'id' : 1, 'quoteAuthor': 1}"
-    )
-})
 public class QuoteDocument {
 
   @Id
-  private UUID id;
+  @JsonProperty("_id")
+  private String id;
+
   private String quoteText;
-  private String quoteAuthor;
+  @Indexed private String quoteAuthor;
   private String quoteGenre;
+
   @Version
+  @JsonProperty("__v")
+  @Field("__v")
   private Integer version;
 }

@@ -1,9 +1,14 @@
 package com.mongo.quote.persistence.repository;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
+import com.mongo.quote.persistence.document.QuoteDocument;
+import java.util.List;
+import java.util.Optional;
 
-@Repository
-public interface QuoteRepository extends MongoRepository {
+public interface QuoteRepository {
 
+  Optional<QuoteDocument> findById(String id);
+
+  List<QuoteDocument> findByAuthor(String author);
+
+  List<QuoteDocument> findAll();
 }

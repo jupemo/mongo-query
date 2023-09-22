@@ -1,4 +1,4 @@
-package com.mongo.persistence;
+package com.mongo.quote.persistence;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
