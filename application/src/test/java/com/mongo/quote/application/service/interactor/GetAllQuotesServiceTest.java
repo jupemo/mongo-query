@@ -7,7 +7,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.mongo.quote.application.mapper.QuoteMapper;
-import com.mongo.quote.application.service.GetQuoteByAuthorQuery.Command;
+import com.mongo.quote.application.service.GetAllQuotesQuery.Command;
 import com.mongo.quote.persistence.repository.QuoteRepository;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -22,25 +22,24 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 @ExtendWith(MockitoExtension.class)
-class GetQuoteByAuthorServiceTest {
+class GetAllQuotesServiceTest {
 
   @Spy QuoteMapper quoteMapper = Mappers.getMapper(QuoteMapper.class);
   @Mock QuoteRepository quoteRepository;
-  @InjectMocks GetQuoteByAuthorService getQuoteByAuthorService;
+  @InjectMocks GetAllQuotesService getAllQuotesService;
 
   @Test
-  @DisplayName("Should return result")
-  void shouldReturnResult() {
-    var author = "test-author";
-    var quotesDocument = List.of(getQuoteDocument("id", author));
+  @DisplayName("Should return paged quoted")
+  void shouldReturnPagedQuote() {
+
+    var quotesDocument = List.of(getQuoteDocument("id", "author"));
     new PageImpl<>(quotesDocument);
 
-    when(quoteRepository.findByAuthor(author, PageRequest.of(1, 10)))
-        .thenReturn(new PageImpl<>(quotesDocument));
+    when(quoteRepository.findAll(PageRequest.of(1, 10))).thenReturn(new PageImpl<>(quotesDocument));
 
-    var result = getQuoteByAuthorService.getByAuthor(new Command(author, 1, 10));
+    var result = getAllQuotesService.getAll(new Command(1, 10));
 
-    verify(quoteRepository, times(1)).findByAuthor(author, PageRequest.of(1, 10));
+    verify(quoteRepository, times(1)).findAll(PageRequest.of(1, 10));
     assertNotNull(result);
     assertEquals(1, result.content().size());
     assertAll(
