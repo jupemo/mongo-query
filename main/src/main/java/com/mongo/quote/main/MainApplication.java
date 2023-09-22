@@ -1,13 +1,12 @@
-package com.mongo.quote.application;
+package com.mongo.quote.main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = "com.mongo.quote")
-public class Application {
+public class MainApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(MainApplication.class, args);
+  }
 }

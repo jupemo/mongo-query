@@ -7,7 +7,7 @@ import com.mongo.quote.rest.dto.QuoteResponseDTO;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface QuoteMapper {
+public interface QuoteDTOMapper {
 
   QuoteResponseDTO map(QuoteResult quoteResult);
 

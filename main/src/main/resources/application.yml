@@ -1,0 +1,14 @@
+
+server:
+  port: 8080
+  shutdown: graceful
+
+# Spring configuration
+spring:
+  application:
+    name: quote
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  profiles:
+    include:
+      - mongo

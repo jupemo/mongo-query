@@ -6,7 +6,7 @@ import com.mongo.quote.application.service.GetQuoteByAuthorQuery.Command;
 import com.mongo.quote.application.service.GetQuoteByIdQuery;
 import com.mongo.quote.rest.dto.PageResponseDTO;
 import com.mongo.quote.rest.dto.QuoteResponseDTO;
-import com.mongo.quote.rest.mapper.QuoteMapper;
+import com.mongo.quote.rest.mapper.QuoteDTOMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,18 +25,18 @@ public class QuoteController {
   private final GetQuoteByIdQuery getQuoteByIdQuery;
   private final GetQuoteByAuthorQuery getQuoteByAuthorQuery;
   private final GetAllQuotesQuery getAllQuotesQuery;
-  private final QuoteMapper quoteMapper;
+  private final QuoteDTOMapper quoteDTOMapper;
 
   @GetMapping("/{quote-id}")
   public QuoteResponseDTO getQuoteById(@PathVariable("quote-id") String quoteId) {
-    return quoteMapper.map(getQuoteByIdQuery.getById(new GetQuoteByIdQuery.Command(quoteId)));
+    return quoteDTOMapper.map(getQuoteByIdQuery.getById(new GetQuoteByIdQuery.Command(quoteId)));
   }
 
   @GetMapping
   public PageResponseDTO<QuoteResponseDTO> getAllQuotes(
       @RequestParam(required = false) Integer page,
       @RequestParam(required = false, value = "page-size") Integer pageSize) {
-    return quoteMapper.map(
+    return quoteDTOMapper.map(
         getAllQuotesQuery.getAll(
             new GetAllQuotesQuery.Command(
                 page != null ? page : FIRST_PAGE_NUMBER, pageSize != null ? pageSize : PAGE_SIZE)));
@@ -47,7 +47,7 @@ public class QuoteController {
       @PathVariable String author,
       @RequestParam(required = false) Integer page,
       @RequestParam(required = false, value = "page-size") Integer pageSize) {
-    return quoteMapper.map(
+    return quoteDTOMapper.map(
         getQuoteByAuthorQuery.getByAuthor(
             new Command(
                 author,

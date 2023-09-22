@@ -17,7 +17,7 @@ import com.mongo.quote.application.service.GetQuoteByAuthorQuery;
 import com.mongo.quote.application.service.GetQuoteByIdQuery;
 import com.mongo.quote.rest.dto.PageResponseDTO;
 import com.mongo.quote.rest.dto.QuoteResponseDTO;
-import com.mongo.quote.rest.mapper.QuoteMapperImpl;
+import com.mongo.quote.rest.mapper.QuoteDTOMapperImpl;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -40,7 +40,8 @@ class QuoteControllerTest {
   @MockBean GetQuoteByIdQuery getQuoteByIdQuery;
   @MockBean GetQuoteByAuthorQuery getQuoteByAuthorQuery;
   @MockBean GetAllQuotesQuery getAllQuotesQuery;
-  @SpyBean QuoteMapperImpl quoteMapper;
+  @SpyBean
+  QuoteDTOMapperImpl quoteMapper;
   @Captor ArgumentCaptor<GetQuoteByAuthorQuery.Command> commandAuthorCaptor;
   @Captor ArgumentCaptor<GetAllQuotesQuery.Command> commandAllCaptor;
 
