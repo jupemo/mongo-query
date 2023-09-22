@@ -14,6 +14,12 @@
   <name>application</name>
   <description>application</description>
 
+  <dependencies>
+    <dependency>
+      <groupId>com.mongo.quote</groupId>
+      <artifactId>infrastructure-persistence</artifactId>
+    </dependency>
+  </dependencies>
 
 
 </project>
