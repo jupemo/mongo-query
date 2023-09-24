@@ -10,7 +10,7 @@ public interface QuoteRepository {
 
   Optional<QuoteDocument> findById(String id);
 
-  Page<QuoteDocument> findByAuthor(String author, Pageable pageable);
+  Page<QuoteDocument> findByAuthor(String author, Integer page, Integer pageSize);
 
-  Page<QuoteDocument> findAll(Pageable pageable);
+  Page<QuoteDocument> findAll(Integer page, Integer pageSize);
 }

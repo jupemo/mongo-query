@@ -6,7 +6,6 @@ import com.mongo.quote.application.mapper.QuoteMapper;
 import com.mongo.quote.application.service.GetQuoteByAuthorQuery;
 import com.mongo.quote.persistence.repository.QuoteRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +18,6 @@ public class GetQuoteByAuthorService implements GetQuoteByAuthorQuery {
   @Override
   public PageResult<QuoteResult> getByAuthor(Command command) {
     return quoteMapper.map(
-        quoteRepository.findByAuthor(
-            command.author(), PageRequest.of(command.page(), command.pageSize())));
+        quoteRepository.findByAuthor(command.author(), command.page(), command.pageSize()));
   }
 }

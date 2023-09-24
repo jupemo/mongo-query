@@ -6,7 +6,6 @@ import com.mongo.quote.application.mapper.QuoteMapper;
 import com.mongo.quote.application.service.GetAllQuotesQuery;
 import com.mongo.quote.persistence.repository.QuoteRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +17,6 @@ public class GetAllQuotesService implements GetAllQuotesQuery {
 
   @Override
   public PageResult<QuoteResult> getAll(Command command) {
-    return quoteMapper.map(
-        quoteRepository.findAll(PageRequest.of(command.page(), command.pageSize())));
+    return quoteMapper.map(quoteRepository.findAll(command.page(), command.pageSize()));
   }
 }

@@ -6,7 +6,6 @@ import com.mongo.quote.persistence.BaseIT;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 
 class QuoteAdaptorTest extends BaseIT {
 
@@ -39,7 +38,7 @@ class QuoteAdaptorTest extends BaseIT {
   @DisplayName("Should return quotes when find by author")
   void shouldReturnQuoteByAuthor() {
     var author = "William Shakespeare";
-    var quotes = quoteRepository.findByAuthor(author, PageRequest.of(0, 10));
+    var quotes = quoteRepository.findByAuthor(author, 0, 10);
 
     assertFalse(quotes.isEmpty());
     assertEquals(2, quotes.getTotalElements());
@@ -51,14 +50,14 @@ class QuoteAdaptorTest extends BaseIT {
   @DisplayName("Should return empty collection when author not exits")
   void shouldReturnEmptyCollectionQuoteByAuthor() {
     var author = "no author";
-    var quotes = quoteRepository.findByAuthor(author, PageRequest.of(0, 10));
+    var quotes = quoteRepository.findByAuthor(author, 0, 10);
     assertEquals(0, quotes.getContent().size());
   }
 
   @Test
   @DisplayName("Should return all quotes when find all")
   void shouldReturnAllQuotes() {
-    var quotes = quoteRepository.findAll(PageRequest.of(0, 10));
+    var quotes = quoteRepository.findAll(0, 10);
 
     assertFalse(quotes.getContent().isEmpty());
     assertEquals(10, quotes.getContent().size());
@@ -68,8 +67,8 @@ class QuoteAdaptorTest extends BaseIT {
   @Test
   @DisplayName("Should return two different pages")
   void shouldReturnTwoDifferentPages() {
-    var quotesPage0 = quoteRepository.findAll(PageRequest.of(0, 10));
-    var quotesPage1 = quoteRepository.findAll(PageRequest.of(1, 10));
+    var quotesPage0 = quoteRepository.findAll(0, 10);
+    var quotesPage1 = quoteRepository.findAll(1, 10);
 
     assertFalse(quotesPage0.getContent().isEmpty());
     assertFalse(quotesPage1.getContent().isEmpty());
