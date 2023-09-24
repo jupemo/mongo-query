@@ -8,8 +8,6 @@
 
 ## How to Run
 
-## How to Run
-
 Follow these steps to start the Spring Boot application:
 
 * **Open Terminal:** Open a terminal on your machine
@@ -65,12 +63,12 @@ The architecture chosen was a simplification of clean architecture.
 - Technology agnosticism: It enables you to adapt to new technologies without a complete rewrite of the application.
 
 Since there is no Business validation in this test I decided to omit the Domain layers, were the Business validations
-should be
+should be.
 
 # Improvements
 
 **Logging** - the application right now does not log, logs is an important topic, the application should log the
-request/responses and important executions, this can be done using Sl4J and LogBack
+request/responses and important executions, this can be done using Sl4J and LogBack.
 
 **Docker** - The Java application is not running in the docker, include a Dockerfile and de java application inside the
 docker-compose.
@@ -89,4 +87,4 @@ In order to improve the efficiency of the application I make the following decis
 # Test reports
 
 The test can be run using `./mvnw verify`
-The tests report are generated inside report/target/site/index.hml
+The tests report are generated inside report/target/site/index.html
