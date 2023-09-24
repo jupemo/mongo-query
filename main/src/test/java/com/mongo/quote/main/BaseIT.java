@@ -27,8 +27,7 @@ import org.testcontainers.utility.DockerImageName;
 @AutoConfigureMockMvc
 public abstract class BaseIT {
 
-  @Autowired
-  MockMvc mvc;
+  @Autowired MockMvc mvc;
 
   @Autowired ObjectMapper objectMapper;
 
@@ -47,16 +46,20 @@ public abstract class BaseIT {
   }
 
   private static void initData() {
+
     try {
       ObjectMapper objectMapper = new ObjectMapper();
       String mongoUrl = MONGO_DB_CONTAINER.getReplicaSetUrl();
       MongoClient mongoClient = MongoClients.create(mongoUrl);
 
       MongoTemplate mongoTemplate = new MongoTemplate(mongoClient, "test");
-      var quoteDocuments =
-          objectMapper.readValue(
-              new File("src/test/resources/data/quotes.json"), QuoteDocument[].class);
-      mongoTemplate.insertAll(Arrays.stream(quoteDocuments).toList());
+      if (mongoTemplate.findAll(QuoteDocument.class).isEmpty()) {
+
+        var quoteDocuments =
+            objectMapper.readValue(
+                new File("src/test/resources/data/quotes.json"), QuoteDocument[].class);
+        mongoTemplate.insertAll(Arrays.stream(quoteDocuments).toList());
+      }
     } catch (JsonProcessingException e) {
       fail("Exception reading init document" + e.getMessage());
     } catch (IOException e) {

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.mongo.quote</groupId>
+    <artifactId>quote-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
+  </parent>
+  <artifactId>report</artifactId>
+  <version>${project.parent.version}</version>
+
+  <dependencies>
+
+
+    <dependency>
+      <groupId>com.mongo.quote</groupId>
+      <artifactId>application</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.mongo.quote</groupId>
+      <artifactId>infrastructure-persistence</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.mongo.quote</groupId>
+      <artifactId>infrastructure-rest</artifactId>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>report-aggregate</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report-aggregate</goal>
+            </goals>
+            <configuration>
+              <dataFileIncludes>**/jacoco/jacoco-*.exec</dataFileIncludes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

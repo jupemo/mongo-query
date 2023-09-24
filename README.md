@@ -69,12 +69,24 @@ should be
 
 # Improvements
 
-Logging - the application right now does not log, logs is an important topic, the application should log the
+**Logging** - the application right now does not log, logs is an important topic, the application should log the
 request/responses and important executions, this can be done using Sl4J and LogBack
+
+**Docker** - The Java application is not running in the docker, include a Dockerfile and de java application inside the
+docker-compose.
+
+**Data initialization** - The data initialization could be done calling the API directly, the API give me some problems
+and I decided not tu call the API, because I didn't to depend on an external endpoint that can done the application to
+fail.
 
 # Decisions
 
 In order to improve the efficiency of the application I make the following decisions.
 
 - **Make quoteAuthor indexable**
-- **Pageable responses** 
+- **Pageable responses**
+
+# Test reports
+
+The test can be run using `./mvnw verify`
+The tests report are generated inside report/target/site/index.hml
