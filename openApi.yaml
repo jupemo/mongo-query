@@ -1,0 +1,94 @@
+openapi: "3.0.3"
+info:
+  title: "mongo_query API"
+  description: "mongo_query API"
+  version: "1.0.0"
+servers:
+  - url: "https://localhost:8080"
+paths:
+  /quotes/{quote-id}:
+    get:
+      summary: "GET quotes/{quote-id}"
+      operationId: "getQuoteById"
+      parameters:
+        - name: "quote-id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/QuoteResponseDTO"
+  /quotes:
+    get:
+      summary: "GET quotes"
+      operationId: "getAllQuotes"
+      parameters:
+        - name: "page"
+          in: "query"
+          required: false
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "page-size"
+          in: "query"
+          required: false
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/QuoteResponseDTO"
+  /authors/{author}/quotes:
+    get:
+      summary: "GET authors/{author}/quotes"
+      operationId: "getQuotesByAuthor"
+      parameters:
+        - name: "author"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "page"
+          in: "query"
+          required: false
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "page-size"
+          in: "query"
+          required: false
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/QuoteResponseDTO"
+components:
+  schemas:
+    QuoteResponseDTO:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        quoteText:
+          type: "string"
+        quoteAuthor:
+          type: "string"
+        quoteGenre:
+          type: "string"
+        version:
+          type: "integer"
+          format: "int32"
