@@ -122,7 +122,7 @@ class QuoteControllerTest {
     var expectedResult = getQuoteResult("id", author);
     var expectedResultQuote = new PageResult<>(0, 10, List.of(expectedResult), 1);
 
-    var request = MockMvcRequestBuilders.get("/quotes/%s/authors".formatted(author));
+    var request = MockMvcRequestBuilders.get("/authors/%s/quotes".formatted(author));
 
     when(getQuoteByAuthorQuery.getByAuthor(any())).thenReturn(expectedResultQuote);
 
@@ -174,7 +174,7 @@ class QuoteControllerTest {
 
   @Test
   void shouldReturn200GetByAuthor_WhenPageAndSize() throws Exception {
-    var request = MockMvcRequestBuilders.get("/quotes/test/authors?page-size=20&page=2");
+    var request = MockMvcRequestBuilders.get("/authors/test/quotes?page-size=20&page=2");
 
     mockMvc.perform(request).andDo(print()).andExpect(status().isOk());
 

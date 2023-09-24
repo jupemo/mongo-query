@@ -19,6 +19,10 @@
       <groupId>com.mongo.quote</groupId>
       <artifactId>infrastructure-persistence</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+    </dependency>
   </dependencies>
 
 

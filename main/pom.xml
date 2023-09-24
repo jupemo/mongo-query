@@ -28,6 +28,11 @@
       <groupId>com.mongo.quote</groupId>
       <artifactId>application</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>mongodb</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>

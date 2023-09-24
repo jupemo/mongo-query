@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/quotes")
+@RequestMapping
 public class QuoteController {
 
   public static final int PAGE_SIZE = 10;
@@ -27,12 +27,12 @@ public class QuoteController {
   private final GetAllQuotesQuery getAllQuotesQuery;
   private final QuoteDTOMapper quoteDTOMapper;
 
-  @GetMapping("/{quote-id}")
+  @GetMapping("/quotes/{quote-id}")
   public QuoteResponseDTO getQuoteById(@PathVariable("quote-id") String quoteId) {
     return quoteDTOMapper.map(getQuoteByIdQuery.getById(new GetQuoteByIdQuery.Command(quoteId)));
   }
 
-  @GetMapping
+  @GetMapping("/quotes")
   public PageResponseDTO<QuoteResponseDTO> getAllQuotes(
       @RequestParam(required = false) Integer page,
       @RequestParam(required = false, value = "page-size") Integer pageSize) {
@@ -42,7 +42,7 @@ public class QuoteController {
                 page != null ? page : FIRST_PAGE_NUMBER, pageSize != null ? pageSize : PAGE_SIZE)));
   }
 
-  @GetMapping("/{author}/authors")
+  @GetMapping("/authors/{author}/quotes")
   public PageResponseDTO<QuoteResponseDTO> getQuotesByAuthor(
       @PathVariable String author,
       @RequestParam(required = false) Integer page,
